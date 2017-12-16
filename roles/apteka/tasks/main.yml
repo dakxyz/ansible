@@ -1,0 +1,8 @@
+- import_tasks: common.yml
+  tags: [always]
+- import_tasks: postgres.yml
+  tags: [postgres, auth]
+- import_tasks: redis.yml
+  tags: [redis, auth]
+- import_tasks: auth.yml
+  tags: [auth]

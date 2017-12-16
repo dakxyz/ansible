@@ -1,0 +1,8 @@
+apteka_postgres_version: 10.1
+apteka_postgres_port: 9601
+apteka_postgres_user: application
+
+apteka_redis_version: 3.2
+apteka_redis_port: 9602
+
+apteka_auth_port: 9701

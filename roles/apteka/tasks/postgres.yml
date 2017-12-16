@@ -1,0 +1,29 @@
+- name: Create postgres volume
+  docker_volume:
+    name: "apteka-postgres-volume"
+
+- name: Run postgres
+  docker_container:
+    name: "apteka-postgres"
+    hostname: "apteka-postgres-{{ inventory_hostname }}"
+    image: "postgres:{{ apteka_postgres_version }}"
+    state: started
+    volumes:
+      - "apteka-postgres-volume:/var/lib/postgresql/data"
+    ports:
+      - "{{ apteka_postgres_port }}:5432"
+    env:
+      PGDATA: /var/lib/postgresql/data/pgdata
+      POSTGRES_USER: "{{ apteka_postgres_user }}"
+      POSTGRES_PASSWORD: "{{ apteka_postgres_password }}"
+
+- name: Sleep for 3 seconds, wait create postgres
+  wait_for: timeout=3
+
+- name: Create database
+  postgresql_db:
+    name: apteka
+    port: "{{ apteka_postgres_port }}"
+    login_host: "{{ apteka_postgres_host }}"
+    login_user: "{{ apteka_postgres_user }}"
+    login_password: "{{ apteka_postgres_password }}"
