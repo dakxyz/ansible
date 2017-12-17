@@ -1,10 +1,10 @@
 FROM php:7.1-fpm
 
-MAINTAINER Denis Akulov <akulov.d.g@gmail.com>
+MAINTAINER Denis Akulov <denis@akulov.xyz>
 
 ENV PHALCON_VERSION=3.2.4
 
-RUN curl -sSL "https://codeload.github.com/phalcon/cphalcon/tar.gz/v${PHALCON_VERSION}" | tar -xz \
+RUN curl -ssl "https://codeload.github.com/phalcon/cphalcon/tar.gz/v${PHALCON_VERSION}" | tar -xz \
     && cd cphalcon-${PHALCON_VERSION}/build \
     && ./install \
     && cp ../tests/_ci/phalcon.ini $(php-config --configure-options | grep -o "with-config-file-scan-dir=\([^ ]*\)" | awk -F'=' '{print $2}') \
@@ -34,8 +34,7 @@ RUN cd /tmp \
     && make install \
     && pecl install yaml \
     && touch /usr/local/etc/php/conf.d/yaml.ini \
-    && echo '[yaml]' > /usr/local/etc/php/conf.d/yaml.ini \
-    && echo 'extension=yaml.so' >> /usr/local/etc/php/conf.d/yaml.ini
-
+    && echo "[yaml]" > /usr/local/etc/php/conf.d/yaml.ini \
+    && echo "extension=yaml.so" >> /usr/local/etc/php/conf.d/yaml.ini
 
 WORKDIR /app

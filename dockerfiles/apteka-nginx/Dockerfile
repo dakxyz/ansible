@@ -1,6 +1,6 @@
 FROM nginx:1.13
 
-MAINTAINER Denis Akulov <akulov.d.g@gmail.com>
+MAINTAINER Denis Akulov <denis@akulov.xyz>
 
 COPY ./config.template /etc/nginx/conf.d/default.conf
 
