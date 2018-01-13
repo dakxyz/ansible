@@ -1,0 +1,11 @@
+- name: Build apteka-phpfpm image
+  docker_image:
+     path: "{{ role_path }}/dockerfiles/phpfpm"
+     name: apteka-phpfpm
+     force: "{{ docker_rebuild_images }}"
+
+- name: Build apteka-nginx image
+  docker_image:
+     path: "{{ role_path }}/dockerfiles/nginx"
+     name: apteka-nginx
+     force: "{{ docker_rebuild_images }}"

@@ -1,0 +1,32 @@
+- name: Set application root path
+  set_fact:
+    application_root_path: "{{ docker_shared_path }}/apteka/app"
+
+- name: Create project folder
+  file:
+    path: "{{ application_root_path }}"
+    state: directory
+    mode: 0755
+
+- name: Run apteka application
+  docker_service:
+    project_name: apteka
+    definition:
+      version: '3'
+      services:
+        nginx:
+          container_name: "apteka-nginx-{{ inventory_hostname }}"
+          image: apteka-nginx
+          hostname: "apteka-nginx-{{ inventory_hostname }}"
+          ports:
+            - "{{ apteka_port }}:80"
+          volumes:
+            - "{{ application_root_path }}:/app:cached"
+          links:
+            - phpfpm
+        phpfpm:
+          container_name: "apteka-phpfpm-{{ inventory_hostname }}"
+          image: apteka-phpfpm
+          hostname: "apteka-phpfpm-{{ inventory_hostname }}"
+          volumes:
+            - "{{ application_root_path }}:/app:cached"

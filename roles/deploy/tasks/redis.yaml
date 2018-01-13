@@ -1,0 +1,14 @@
+- name: Create redis volume
+  docker_volume:
+    name: "apteka-redis-volume"
+
+- name: Run redis
+  docker_container:
+    name: "apteka-redis-{{ inventory_hostname }}"
+    hostname: "apteka-redis-{{ inventory_hostname }}"
+    image: "redis:{{ redis_version }}"
+    state: started
+    volumes:
+      - "apteka-redis-volume:/var/lib/redis/data"
+    ports:
+      - "{{ redis_port }}:6379"

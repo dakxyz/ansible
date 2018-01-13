@@ -1,0 +1,7 @@
+postgres_version: 10.1
+postgres_port: 9601
+postgres_user: application
+redis_version: 3.2
+redis_port: 9602
+apteka_port: 9701
+docker_rebuild_images: yes

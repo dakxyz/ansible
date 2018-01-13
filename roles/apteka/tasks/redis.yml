@@ -1,8 +1,0 @@
-- name: Run redis
-  docker_container:
-    name: "apteka-redis"
-    hostname: "apteka-redis-{{ inventory_hostname }}"
-    image: "redis:{{ apteka_redis_version }}"
-    state: started
-    ports:
-      - "{{ apteka_redis_port }}:6379"

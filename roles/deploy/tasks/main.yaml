@@ -1,0 +1,8 @@
+- import_tasks: docker_build_images.yaml
+  tags: [docker_build_images]
+- import_tasks: postgres.yaml
+  tags: [postgres]
+- import_tasks: redis.yaml
+  tags: [redis]
+- import_tasks: application.yaml
+  tags: [application]

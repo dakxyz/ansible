@@ -1,5 +1,0 @@
-- name: Create project folder
-  file:
-    path: "{{ apteka_app_root_path }}"
-    state: directory
-    mode: 0755
