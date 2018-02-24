@@ -8,6 +8,12 @@
     state: directory
     mode: 0755
 
+- name: Get code from repository
+  git:
+    repo: git@github.com:dakxyz/apteka.git
+    dest: "{{ application_root_path }}"
+    update: no
+
 - name: Run apteka application
   docker_service:
     project_name: apteka
@@ -30,3 +36,6 @@
           hostname: "apteka-phpfpm-{{ inventory_hostname }}"
           volumes:
             - "{{ application_root_path }}:/app:cached"
+
+- name: Run composer
+  shell: docker exec apteka-phpfpm-localhost sh -c "composer install --no-interaction"

@@ -9,6 +9,6 @@
     image: "redis:{{ redis_version }}"
     state: started
     volumes:
-      - "apteka-redis-volume:/var/lib/redis/data"
+      - "apteka-redis-volume:/data"
     ports:
       - "{{ redis_port }}:6379"
